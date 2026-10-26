@@ -1,78 +1,160 @@
 <!DOCTYPE html>
-<html lang="vi" class="dark">
-<head>
+<html lang="vi"
+<head
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bộ Công Cụ Tiện Ích - Tất Cả Trong Một</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#f0f9ff',
-                            500: '#06b6d4',
-                            600: '#0891b2',
-                            700: '#0e7490',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .active-tab {
-            background-color: rgba(6, 182, 212, 0.15);
-            border-left: 4px solid #06b6d4;
-            color: #06b6d4;
-        }
-        canvas {
-            touch-action: none;
-        }
-    </style>
+    <title>Green School - Hệ Thống Số Hóa Môi Trường Học Đường</title>
+    <!-- Nhúng thư viện Tailwind CSS để áp dụng giao diện -->
+    <script src="https://jsdelivr.net"></script>
+    <!-- Nhúng thư viện Lucide Icons để hiển thị các biểu tượng -->
+    <script src="https://unpkg.com"></script>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen flex flex-col font-sans transition-colors duration-200">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
-    <!-- Header -->
-    <header class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <i class="fa-solid fa-[#06b6d4] fa-cubes text-2xl text-cyan-500"></i>
-                <h1 class="text-xl font-bold bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
-                    All-In-One Toolkit
-                </h1>
+    <!-- THANH DIỀU HƯỚNG TRÊN CÙNG (TOPBAR) -->
+    <header class="bg-emerald-600 text-white shadow-md sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <i data-lucide="leaf" class="w-8 h-8 text-emerald-200"></i>
+            <div>
+                <h1 class="text-xl font-bold tracking-wide">Green School</h1>
+                <p class="text-xs text-emerald-100">Hệ Thống Số Hóa Môi Trường Học Đường</p>
             </div>
-            <div class="flex items-center space-x-2">
-                <button id="themeToggleBtn" onclick="toggleTheme()" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
-                    <i id="themeIcon" class="fa-solid fa-sun"></i>
-                </button>
+        </div>
+        <div class="flex items-center space-x-4">
+            <span class="bg-emerald-700 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5">
+                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                Hệ thống trực tuyến
+            </span>
+            <div class="w-10 h-10 rounded-full bg-emerald-500 border-2 border-emerald-200 flex items-center justify-center font-bold">
+                BGH
             </div>
         </div>
     </header>
 
-    <!-- Main Container -->
-    <div class="max-w-7xl mx-auto px-4 py-6 flex-grow flex flex-col md:flex-row gap-6 w-full">
-        <!-- Sidebar Navigation -->
-        <aside class="w-full md:w-64 bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 shrink-0 flex flex-col justify-between">
-            <nav class="space-y-1">
-                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider px-3 mb-2">Danh mục</p>
-                <button onclick="switchTab('calc')" id="tab-calc" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition active-tab">
-                    <i class="fa-solid fa-calculator w-5 text-center text-cyan-500"></i>
-                    <span>Máy tính & Giải toán</span>
-                </button>
-                <button onclick="switchTab('text')" id="tab-text" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                    <i class="fa-solid fa-font w-5 text-center text-emerald-500"></i>
-                    <span>Xử lý Văn bản</span>
-                </button>
-                <button onclick="switchTab('time')" id="tab-time" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                    <i class="fa-solid fa-clock w-5 text-center text-purple-500"></i>
-                    <span>Thời gian & Đếm ngược</span>
-                </button>
-                <button onclick="switchTab('todo')" id="tab-todo" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                    <i class="fa-solid fa-list-check w-5 text-center text-amber-500"></i>
-                    <span>Quản lý Công việc</span>
+    <!-- BỐ CỤC CHÍNH (MAIN LAYOUT) -->
+    <main class="max-w-[1600px] mx-auto p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+        
+        <!-- CỘT TRÁI: ĐIỀU KHIỂN & BẢN ĐỒ KHU VỰC (3 CỘT RỘNG) -->
+        <section class="lg:col-span-3 space-y-6">
+            
+            <!-- BẢNG ĐIỀU KHIỂN CHỨC NĂNG -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-wrap gap-4 items-center justify-between">
+                <div class="flex flex-wrap gap-3">
+                    <button class="bg-emerald-50 text-emerald-700 font-medium px-4 py-2.5 rounded-xl border border-emerald-200 flex items-center gap-2 hover:bg-emerald-100 transition-colors">
+                        <i data-lucide="layers" class="w-4 h-4"></i> Tầng học
+                    </button>
+                    <button class="bg-white text-slate-600 font-medium px-4 py-2.5 rounded-xl border border-slate-200 flex items-center gap-2 hover:bg-slate-50 transition-colors">
+                        <i data-lucide="droplet" class="w-4 h-4"></i> Hệ thống nước
+                    </button>
+                    <button class="bg-white text-slate-600 font-medium px-4 py-2.5 rounded-xl border border-slate-200 flex items-center gap-2 hover:bg-slate-50 transition-colors">
+                        <i data-lucide="zap" class="w-4 h-4"></i> Lưới điện trường
+                    </button>
+                </div>
+                <div class="text-sm text-slate-500 flex items-center gap-2">
+                    <i data-lucide="clock" class="w-4 h-4"></i>
+                    Cập nhật mới nhất: <span class="font-medium text-slate-700">Vừa xong</span>
+                </div>
+            </div>
+
+            <!-- BẢN ĐỒ MÔ PHỎNG KHU VỰC TRƯỜNG HỌC -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-bold text-lg text-slate-900 flex items-center gap-2">
+                        <i data-lucide="map" class="w-5 h-5 text-emerald-600"></i> Sơ đồ số hóa mặt bằng
+                    </h3>
+                    <div class="flex items-center gap-4 text-xs font-medium text-slate-500">
+                        <span class="flex items-center gap-1.5"><span class="w-3 h-3 bg-emerald-500 rounded-sm"></span>Khu học tập</span>
+                        <span class="flex items-center gap-1.5"><span class="w-3 h-3 bg-blue-500 rounded-sm"></span>Khu hành chính</span>
+                        <span class="flex items-center gap-1.5"><span class="w-3 h-3 bg-amber-500 rounded-sm"></span>Sân chơi/Cây xanh</span>
+                    </div>
+                </div>
+
+                <!-- LƯỚI SƠ ĐỒ TRƯỜNG HỌC -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 min-h-[350px]">
+                    <div class="bg-emerald-50 border-2 border-dashed border-emerald-300 rounded-2xl p-4 flex flex-col justify-between hover:bg-emerald-100/70 transition-all cursor-pointer group">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-emerald-700 bg-emerald-200/60 px-2 py-0.5 rounded">KHU A</span>
+                            <i data-lucide="thermometer" class="w-5 h-5 text-emerald-600 group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-slate-800 text-base">Khối Lớp Học</p>
+                            <p class="text-xs text-slate-500 mt-1">Nhiệt độ: 26°C - Tốt</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 border-2 border-dashed border-blue-300 rounded-2xl p-4 flex flex-col justify-between hover:bg-blue-100/70 transition-all cursor-pointer group">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-blue-700 bg-blue-200/60 px-2 py-0.5 rounded">KHU B</span>
+                            <i data-lucide="building" class="w-5 h-5 text-blue-600 group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-slate-800 text-base">Hiệu Bộ & Văn Phòng</p>
+                            <p class="text-xs text-slate-500 mt-1">Thiết bị: Đang hoạt động</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-50 border-2 border-dashed border-amber-300 rounded-2xl p-4 flex flex-col justify-between hover:bg-amber-100/70 transition-all cursor-pointer group">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-amber-700 bg-amber-200/60 px-2 py-0.5 rounded">KHU C</span>
+                            <i data-lucide="wind" class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-slate-800 text-base">Nhà Đa Năng</p>
+                            <p class="text-xs text-slate-500 mt-1">Chất lượng khí: 94%</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-emerald-50 border-2 border-dashed border-emerald-300 rounded-2xl p-4 flex flex-col justify-between hover:bg-emerald-100/70 transition-all cursor-pointer group">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold text-emerald-700 bg-emerald-200/60 px-2 py-0.5 rounded">KHU D</span>
+                            <i data-lucide="sprout" class="w-5 h-5 text-emerald-600 group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-slate-800 text-base">Sân Vườn Sinh Thái</p>
+                            <p class="text-xs text-slate-500 mt-1">Độ ẩm đất: 78%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CỘT PHẢI: BÁO CÁO THỐNG KÊ (1 CỘT RỘNG) -->
+        <section class="space-y-6">
+            
+            <!-- THÔNG SỐ NHANH (CARDS) -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm flex items-center space-x-3">
+                    <div class="p-3 bg-orange-50 rounded-lg text-orange-600">
+                        <i data-lucide="flame" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400 font-medium">Lượng rác thải</p>
+                        <p class="text-lg font-bold text-slate-800">1.2 Tấn</p>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm flex items-center space-x-3">
+                    <div class="p-3 bg-blue-50 rounded-lg text-blue-600">
+                        <i data-lucide="lightbulb" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400 font-medium">Điện tiết kiệm</p>
+                        <p class="text-lg font-bold text-slate-800">340 kWh</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TIÊU CHÍ ĐÁNH GIÁ (BGH THỐNG KÊ) -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <h3 class="font-bold text-lg text-slate-900 mb-5 flex items-center gap-2">
+                    <i data-lucide="bar-chart-3" class="w-5 h-5 text-emerald-600"></i> Thống kê từ BGH
+                </h3>
+                <div class="space-y-5">
+                    
+                    <!-- Tiêu chí 1 -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm font-medium">
+                            <span class="text-slate-600">Phân loại rác tại nguồn</span>
+                            <span class="text-emerald-600 font-bold">85%</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                            
