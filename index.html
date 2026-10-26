@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bộ Công Cụ Tiện Ích - Tất Cả Trong Một</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            500: '#06b6d4',
+                            600: '#0891b2',
+                            700: '#0e7490',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .active-tab {
+            background-color: rgba(6, 182, 212, 0.15);
+            border-left: 4px solid #06b6d4;
+            color: #06b6d4;
+        }
+        canvas {
+            touch-action: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen flex flex-col font-sans transition-colors duration-200">
+
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-[#06b6d4] fa-cubes text-2xl text-cyan-500"></i>
+                <h1 class="text-xl font-bold bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
+                    All-In-One Toolkit
+                </h1>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button id="themeToggleBtn" onclick="toggleTheme()" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                    <i id="themeIcon" class="fa-solid fa-sun"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto px-4 py-6 flex-grow flex flex-col md:flex-row gap-6 w-full">
+        <!-- Sidebar Navigation -->
+        <aside class="w-full md:w-64 bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 shrink-0 flex flex-col justify-between">
+            <nav class="space-y-1">
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider px-3 mb-2">Danh mục</p>
+                <button onclick="switchTab('calc')" id="tab-calc" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition active-tab">
+                    <i class="fa-solid fa-calculator w-5 text-center text-cyan-500"></i>
+                    <span>Máy tính & Giải toán</span>
+                </button>
+                <button onclick="switchTab('text')" id="tab-text" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                    <i class="fa-solid fa-font w-5 text-center text-emerald-500"></i>
+                    <span>Xử lý Văn bản</span>
+                </button>
+                <button onclick="switchTab('time')" id="tab-time" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                    <i class="fa-solid fa-clock w-5 text-center text-purple-500"></i>
+                    <span>Thời gian & Đếm ngược</span>
+                </button>
+                <button onclick="switchTab('todo')" id="tab-todo" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                    <i class="fa-solid fa-list-check w-5 text-center text-amber-500"></i>
+                    <span>Quản lý Công việc</span>
